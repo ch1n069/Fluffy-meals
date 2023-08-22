@@ -1,7 +1,7 @@
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 import classes from "./AvailableMeals.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useApi from "../../hooks/use-api";
 
 const DUMMY_MEALS = [
@@ -32,7 +32,14 @@ const DUMMY_MEALS = [
 ];
 
 const AvailableMeals = () => {
-  const { getData } = useApi();
+  const [meals, setMeals] = useState([]);
+  const transform = () => {};
+  const { getData } = useApi(
+    {
+      url: "https://react-fundamentals-c4ee7-default-rtdb.firebaseio.com/Meals.json",
+    },
+    transform
+  );
   useEffect(() => {
     getData();
   }, []);

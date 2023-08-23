@@ -32,10 +32,21 @@ const DUMMY_MEALS = [
 ];
 
 const AvailableMeals = () => {
-  const [meals, setMeals] = useState();
+  const [meals, setMeals] = useState([]);
   const transform = (data) => {
-    console.log("data is", data);
+    const loadedMeals = [];
+
+    // Extract meal objects into an array
+    for (const key in data) {
+      if (data.hasOwnProperty(key) && typeof data[key] === "object") {
+        loadedMeals.push(data[key]);
+      }
+    }
+
+    // Update state with extracted meal objects
+    setMeals(loadedMeals);
   };
+  console.log("dattttt", meals);
   const { data, error, isLoading, getData } = useApi();
   // useEffect
   useEffect(() => {
@@ -46,13 +57,13 @@ const AvailableMeals = () => {
       transform
     );
   }, []);
-  const mealsList = DUMMY_MEALS.map((meal) => (
+  const mealsList = meals.map((item) => (
     <MealItem
-      key={meal.id}
-      id={meal.id}
-      name={meal.name}
-      description={meal.description}
-      price={meal.price}
+      key={item.id}
+      // id={meal.id}
+      name={item.name}
+      description={item.description}
+      price={item.price}
     />
   ));
 

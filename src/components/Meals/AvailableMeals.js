@@ -69,6 +69,7 @@ const AvailableMeals = () => {
           <ul>{mealsList}</ul>
         </Card>
       )}
+      {error && <p>error when fetching the data</p>}
     </section>
   );
 };

@@ -34,14 +34,7 @@ const DUMMY_MEALS = [
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const transform = (data) => {
-    const loadedMeals = [];
-
-    // Extract meal objects into an array
-    for (const key in data) {
-      if (data.hasOwnProperty(key) && typeof data[key] === "object") {
-        loadedMeals.push(data[key]);
-      }
-    }
+    const loadedMeals = Object.values(data);
 
     // Update state with extracted meal objects
     setMeals(loadedMeals);
@@ -59,7 +52,7 @@ const AvailableMeals = () => {
   }, []);
   const mealsList = meals.map((item) => (
     <MealItem
-      key={item.id}
+      key={item.name}
       // id={meal.id}
       name={item.name}
       description={item.description}

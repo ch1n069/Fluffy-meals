@@ -40,7 +40,7 @@ const AvailableMeals = () => {
     setMeals(loadedMeals);
   };
   console.log("dattttt", meals);
-  const { data, error, isLoading, getData } = useApi();
+  const { data, error, isLoading: loading, getData } = useApi();
   // useEffect
   useEffect(() => {
     getData(
@@ -62,9 +62,13 @@ const AvailableMeals = () => {
 
   return (
     <section className={classes.meals}>
-      <Card>
-        <ul>{mealsList}</ul>
-      </Card>
+      {loading ? (
+        <p>loading meals</p>
+      ) : (
+        <Card>
+          <ul>{mealsList}</ul>
+        </Card>
+      )}
     </section>
   );
 };

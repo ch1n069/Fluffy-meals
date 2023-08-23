@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-const useForm = () => {
+const useForm = (validateValue) => {
   // accept a function that will be used to check the validity of the entered input
   //return a form validity status
   const [enteredValue, setEnteredValue] = useState("");
@@ -10,20 +10,23 @@ const useForm = () => {
     setEnteredValue(e.target.value);
   };
   //
-  const formValidity = enteredValue.trim() !== "" && !isTouched;
+  const valueIsValid = validateValue(enteredValue);
+  const hasError = !valueIsValid && isTouched;
+
+  //   blur function
   const inputBlurHandler = (e) => {
     setIsTouched(true);
   };
   const resetInput = () => {
     setEnteredValue("");
+    setIsTouched(false);
   };
-  const hasError = formValidity;
   return {
     enteredValueHandler,
     inputBlurHandler,
     resetInput,
     enteredValue,
-    isTouched,
+    // isTouched,
     hasError,
     formIsValid,
   };

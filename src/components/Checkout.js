@@ -16,6 +16,9 @@ const Checkout = (props) => {
 
   const submitFormHandler = (e) => {
     e.preventDefault();
+    if (nameHasError) {
+      return;
+    }
     console.log("submitting form with the following values", nameValue);
     resetName();
   };
@@ -29,6 +32,7 @@ const Checkout = (props) => {
           onBlur={nameBlurHandler}
           value={nameValue}
         />
+        {nameHasError && <p>This field cannot be empty</p>}
       </div>
       {/* <div className={styles.control}>
         <label for="street">Street</label>

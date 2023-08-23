@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./Checkout.module.css";
-const Checkout = () => {
+const Checkout = (props) => {
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+  };
   return (
     <form>
       <div className={styles.control}>
@@ -24,7 +27,10 @@ const Checkout = () => {
         <input type="text" name="" value="" />
       </div>
       <div>
-        <button>Confirm</button>
+        <button type="button" onClick={props.onCancel}>
+          Cancel
+        </button>
+        <button onClick={{}}>Confirm</button>
       </div>
     </form>
   );

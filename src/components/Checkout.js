@@ -11,7 +11,13 @@ const Checkout = (props) => {
     isTouched: nameTouched,
     resetInput: resetName,
   } = useForm((value) => value.trim() !== "");
-
+  const {
+    enteredValue: streetValue,
+    enteredValueHandler: streetChangeHandler,
+    hasError: streetHasError,
+    resetInput: resetStreet,
+    inputBlurHandler: streetBlurHandler,
+  } = useForm((value) => value.trim() !== "");
   const nameChangeHandler = () => {};
 
   const submitFormHandler = (e) => {
@@ -19,7 +25,11 @@ const Checkout = (props) => {
     if (nameHasError) {
       return;
     }
-    console.log("submitting form with the following values", nameValue);
+    console.log(
+      "submitting form with the following values",
+      nameValue,
+      streetValue
+    );
     resetName();
   };
   return (
@@ -34,9 +44,15 @@ const Checkout = (props) => {
         />
         {nameHasError && <p>This field cannot be empty</p>}
       </div>
-      {/* <div className={styles.control}>
+      <div className={styles.control}>
         <label for="street">Street</label>
-        <input type="" name="" value="" />
+        <input
+          type="text"
+          name="street"
+          value={streetValue}
+          onBlur={streetBlurHandler}
+          onChange={streetChangeHandler}
+        />
       </div>
       <div className={styles.control}>
         <label for="postal code">Postal Code</label>
@@ -49,7 +65,7 @@ const Checkout = (props) => {
       <div className={styles.control}>
         <label for="city">City</label>
         <input type="text" name="" value="" />
-      </div> */}
+      </div>
       <div>
         <button type="button" onClick={props.onCancel}>
           Cancel

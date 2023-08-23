@@ -34,7 +34,7 @@ const DUMMY_MEALS = [
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const transform = () => {};
-  const { getData } = useApi(
+  const { error, isLoading, getData } = useApi(
     {
       url: "https://react-fundamentals-c4ee7-default-rtdb.firebaseio.com/Meals.json",
     },
